@@ -1,0 +1,35 @@
+class PeçaDominó:
+    def __init__(self, valor1, valor2):
+        # Verifica se os valores são válidos (entre zero e seis)
+        if 0 <= valor1 <= 6 and 0 <= valor2 <= 6:
+            self.valor1 = valor1
+            self.valor2 = valor2
+        else:
+            raise ValueError("Valores inválidos para uma peça de dominó.")
+
+    def __str__(self):
+        return f"[{self.valor1}|{self.valor2}]"
+
+    def combina_com(self, outra_peça):
+        # Verifica se há pelo menos um valor em comum entre as peças
+        return self.valor1 == outra_peça.valor1 or self.valor1 == outra_peça.valor2 \
+               or self.valor2 == outra_peça.valor1 or self.valor2 == outra_peça.valor2
+
+
+# Programa de teste
+peça1_valor1 = int(input("Informe o valor da primeira peça (lado 1): "))
+peça1_valor2 = int(input("Informe o valor da primeira peça (lado 2): "))
+
+peça2_valor1 = int(input("Informe o valor da segunda peça (lado 1): "))
+peça2_valor2 = int(input("Informe o valor da segunda peça (lado 2): "))
+
+peça1 = PeçaDominó(peça1_valor1, peça1_valor2)
+peça2 = PeçaDominó(peça2_valor1, peça2_valor2)
+
+print("Peça 1:", peça1)
+print("Peça 2:", peça2)
+
+if peça1.combina_com(peça2):
+    print("As peças combinam.")
+else:
+    print("As peças não combinam.")
