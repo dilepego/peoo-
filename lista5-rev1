@@ -1,0 +1,42 @@
+class Recorde:
+    def __init__(self, atleta_nome, atleta_nacionalidade, data, tempo):
+        self.atleta_nome = atleta_nome
+        self.atleta_nacionalidade = atleta_nacionalidade
+        self.data = data
+        self.tempo = tempo
+
+    def retornar_dados(self):
+        return f"Atleta: {self.atleta_nome}, Nacionalidade: {self.atleta_nacionalidade}, Data: {self.data}, Tempo: {self.tempo}"
+
+class Esporte:
+    def __init__(self, nome_esporte, nome_prova):
+        self.nome_esporte = nome_esporte
+        self.nome_prova = nome_prova
+        self.recorde_list = []
+
+    def inserir_recorde(self, recorde):
+        self.recorde_list.append(recorde)
+
+    def retornar_recorde_menor_tempo(self):
+        if not self.recorde_list:
+            return None
+        return min(self.recorde_list, key=lambda recorde: recorde.tempo)
+
+# Exemplo de uso
+if __name__ == "__main__":
+    esporte = Esporte("Natação", "100 metros rasos")
+
+    recorde1 = Recorde("Atleta 1", "Brasileira", "2023-08-01", "10.5 segundos")
+    recorde2 = Recorde("Atleta 2", "Americana", "2023-08-05", "10.3 segundos")
+    recorde3 = Recorde("Atleta 3", "Canadense", "2023-08-10", "10.7 segundos")
+
+    esporte.inserir_recorde(recorde1)
+    esporte.inserir_recorde(recorde2)
+    esporte.inserir_recorde(recorde3)
+
+    recorde_menor_tempo = esporte.retornar_recorde_menor_tempo()
+    if recorde_menor_tempo:
+        print("Recorde de menor tempo:")
+        print(recorde_menor_tempo.retornar_dados())
+    else:
+        print("Nenhum recorde cadastrado.")
