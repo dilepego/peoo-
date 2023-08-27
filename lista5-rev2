@@ -1,0 +1,52 @@
+from enum import Enum
+
+class Midia(Enum):
+    CD = "CD"
+    Vinil = "Vinil"
+    Digital = "Digital"
+    Cassete = "Cassete"
+    Streaming = "Streaming"
+
+class Album:
+    def __init__(self, titulo, formato, gravadora, data_lancamento):
+        self.titulo = titulo
+        self.formato = formato
+        self.gravadora = gravadora
+        self.data_lancamento = data_lancamento
+
+    def retornar_dados(self):
+        return f"Título: {self.titulo}, Formato: {self.formato.value}, Gravadora: {self.gravadora}, Data de lançamento: {self.data_lancamento}"
+
+class Banda:
+    def __init__(self, nome, pais_origem, estilo_musical):
+        self.nome = nome
+        self.pais_origem = pais_origem
+        self.estilo_musical = estilo_musical
+        self.albums = []
+
+    def inserir_album(self, album):
+        self.albums.append(album)
+
+    def retornar_ultimo_lancamento(self):
+        if not self.albums:
+            return None
+        return max(self.albums, key=lambda album: album.data_lancamento)
+
+# Exemplo de uso
+if __name__ == "__main__":
+    banda = Banda("Banda X", "Brasil", "Rock")
+
+    album1 = Album("Álbum 1", Midia.CD, "Gravadora A", "2023-08-01")
+    album2 = Album("Álbum 2", Midia.Vinil, "Gravadora B", "2023-06-15")
+    album3 = Album("Álbum 3", Midia.Digital, "Gravadora C", "2023-10-20")
+
+    banda.inserir_album(album1)
+    banda.inserir_album(album2)
+    banda.inserir_album(album3)
+
+    ultimo_lancamento = banda.retornar_ultimo_lancamento()
+    if ultimo_lancamento:
+        print("Último lançamento:")
+        print(ultimo_lancamento.retornar_dados())
+    else:
+        print("Nenhum álbum cadastrado.")
