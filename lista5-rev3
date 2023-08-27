@@ -1,0 +1,59 @@
+from enum import Enum
+
+class Ensino(Enum):
+    Fundamental = "Ensino Fundamental"
+    Medio = "Ensino Médio"
+    Superior = "Ensino Superior"
+
+class TipoAmbiente(Enum):
+    Sala = "Sala"
+    Laboratorio = "Laboratório"
+    Auditorio = "Auditório"
+    Quadra = "Quadra"
+    Biblioteca = "Biblioteca"
+
+class Ambiente:
+    def __init__(self, nome, area, capacidade, tipo):
+        self.nome = nome
+        self.area = area
+        self.capacidade = capacidade
+        self.tipo = tipo
+
+    def retornar_dados(self):
+        return f"Nome: {self.nome}, Área: {self.area} m², Capacidade: {self.capacidade} pessoas, Tipo: {self.tipo.value}"
+
+class Escola:
+    def __init__(self, nome, endereco, data_fundacao, nivel_ensino):
+        self.nome = nome
+        self.endereco = endereco
+        self.data_fundacao = data_fundacao
+        self.nivel_ensino = nivel_ensino
+        self.ambientes = []
+
+    def inserir_ambiente(self, ambiente):
+        self.ambientes.append(ambiente)
+
+    def retornar_ambientes(self):
+        return self.ambientes
+
+    def calcular_area_total(self):
+        return sum(ambiente.area for ambiente in self.ambientes)
+
+# Exemplo de uso
+if __name__ == "__main__":
+    escola = Escola("Escola ABC", "Rua Principal, 123", "2000-01-15", Ensino.Medio)
+
+    ambiente1 = Ambiente("Sala 101", 50, 30, TipoAmbiente.Sala)
+    ambiente2 = Ambiente("Laboratório 1", 80, 20, TipoAmbiente.Laboratorio)
+    ambiente3 = Ambiente("Quadra Poliesportiva", 600, 100, TipoAmbiente.Quadra)
+
+    escola.inserir_ambiente(ambiente1)
+    escola.inserir_ambiente(ambiente2)
+    escola.inserir_ambiente(ambiente3)
+
+    print("Ambientes da escola:")
+    for ambiente in escola.retornar_ambientes():
+        print(ambiente.retornar_dados())
+
+    area_total = escola.calcular_area_total()
+    print(f"Área total da escola: {area_total} m²")
