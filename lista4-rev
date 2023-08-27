@@ -1,0 +1,41 @@
+class Esporte:
+    def __init__(self, nome, horarios, mensalidade):
+        self.nome = nome
+        self.horarios = horarios
+        self.mensalidade = mensalidade
+
+class Academia:
+    def __init__(self, nome):
+        self.nome = nome
+        self.esportes = []
+
+    def inserir_esporte(self, esporte):
+        self.esportes.append(esporte)
+
+    def listar_esportes(self):
+        for esporte in self.esportes:
+            print(f"Esporte: {esporte.nome}, Horários: {', '.join(esporte.horarios)}, Mensalidade: R${esporte.mensalidade:.2f}")
+
+    def media_mensalidade(self):
+        if not self.esportes:
+            return 0
+        total_mensalidades = sum(esporte.mensalidade for esporte in self.esportes)
+        return total_mensalidades / len(self.esportes)
+
+# Exemplo de uso
+if __name__ == "__main__":
+    academia = Academia("Academia XYZ")
+
+    esporte1 = Esporte("Futebol", ["Segunda 18:00", "Quarta 20:00"], 150.00)
+    esporte2 = Esporte("Natação", ["Terça 17:00", "Quinta 19:00"], 200.00)
+    esporte3 = Esporte("Yoga", ["Sábado 10:00"], 80.00)
+
+    academia.inserir_esporte(esporte1)
+    academia.inserir_esporte(esporte2)
+    academia.inserir_esporte(esporte3)
+
+    print("Esportes ofertados:")
+    academia.listar_esportes()
+
+    media = academia.media_mensalidade()
+    print(f"Média da mensalidade: R${media:.2f}")
