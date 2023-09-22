@@ -1,0 +1,33 @@
+import json
+from datetime import datetime
+
+class Medicamento:
+  def __init__(self,id,descricao,valor,vencimento):
+    self.__id = id
+    self.__descricao = descricao
+    self.__valor = valor
+    self.__vencimento = vencimento
+  def get_id(self):
+    return self.__id
+  def get_descricao(self):
+    return self.__descricao
+  def get_valor(self):
+    return self.__valor
+  def get_vencimento(self):
+    return self.__vencimento
+  def set_id(self,id):
+    self.__id = id
+  def set_descricao(self,descricao):
+    self.__descricao = descricao
+  def set_valor(self,valor):
+    self.__valor = valor
+  def set_vencimento(self,vencimento):
+    self.__vencimento = vencimento
+  def to_json(self):
+        return { '__id' : self.__id, '__descricao': self.__descricao, '__valor' : self.__valor, '__vencimento': self.__vencimento.strftime('%d/%m/%Y %H:%M')}
+  def __str__(self):
+        return f"{self.__id} - {self.__descricao} - {self.__valor} - {self.__vencimento}"
+
+class UI:
+  @classmethod
+  def main(cls)
